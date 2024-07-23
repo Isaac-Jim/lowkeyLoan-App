@@ -28,7 +28,7 @@ const ProfileScreen = () => {
         <Text style={styles.sectionTitle}>User Profile</Text>
         <Text>Name: Amy Mee</Text>
         <Text>Location: Sarbah Hall, UG</Text>
-        <Image source={require('./assets/profile-pic.jpg')} style={styles.userPhoto} />
+        <Image source={require('./assets/profile.png')} style={styles.userPhoto} />
       </View>
 
       {/* Connected Accounts */}

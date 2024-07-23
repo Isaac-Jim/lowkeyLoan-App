@@ -55,7 +55,7 @@ const HomeSupport = () => {
         <Button title="Profile" onPress={() => {}} />
       </View>
 
-      <Image source={require('./image.png')} style={{ marginTop: 50 }} />
+      <Image source={require('./assets/profile.png')} style={{ marginTop: 50 }} />
       <Text style={{ marginTop: 10 }}>Let's chat</Text>
     </View>
     </View>

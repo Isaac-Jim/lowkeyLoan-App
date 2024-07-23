@@ -9,7 +9,7 @@ const SplashScreen = () => {
     const handleSignUpNavigation = () => {
       navigation.navigate('SignIn');
     };
-  
+    
     return (
         <LinearGradient
       colors={['lightgreen', 'black']}
@@ -34,7 +34,7 @@ const SplashScreen = () => {
         >
           <Text style={styles.startButtonText}>Get Started</Text>
         </TouchableOpacity>
-      </View>
+    </View>
   </LinearGradient>
     );
   };

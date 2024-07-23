@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -27,11 +27,14 @@ const SplashScreen = () => {
       </View>
   
       <View>
-      <TouchableOpacity style={styles.startButton} onPress={handleSignUpNavigation}>
-        <Text style={styles.startButtonText}>Get Started</Text>
-      </TouchableOpacity>
-    </View>
-
+      <TouchableOpacity
+          style={styles.startButton}
+          onPress={handleSignUpNavigation}
+          accessibilityLabel="Get Started Button"
+        >
+          <Text style={styles.startButtonText}>Get Started</Text>
+        </TouchableOpacity>
+      </View>
   </LinearGradient>
     );
   };
@@ -39,7 +42,6 @@ const SplashScreen = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'green',
       justifyContent: 'center',
       alignItems: 'center',
     },

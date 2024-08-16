@@ -1,19 +1,20 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ProfileScreen from './screens/ProfileScreen';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import HomeSupport from './screens/HomeSupport'; // Adjust the path to where your HomeSupport component is located
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <ProfileScreen />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <HomeSupport />
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
+
+export default App;

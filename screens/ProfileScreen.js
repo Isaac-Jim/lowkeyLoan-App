@@ -77,6 +77,13 @@ const ProfileScreen = () => {
       <View style={styles.section}>
         <Button title="Logout" onPress={handleLogout} color="red" />
       </View>
+      <View style={styles.navigationButtons}>
+        <Button title="Home" onPress={() => {}} />
+        <Button title="Loan" onPress={() => {}} />
+        <Button title="Chat" onPress={() => {}} color="purple" />
+        <Button title="Profile" onPress={() => {}} />
+      </View>
+      
     </ScrollView>
   );
 };

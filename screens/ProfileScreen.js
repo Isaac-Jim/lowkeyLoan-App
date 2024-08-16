@@ -5,7 +5,7 @@ const ProfileScreen = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isPasswordEnabled, setIsPasswordEnabled] = useState(false);
 
-  const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
+  const toggleDarkMode = () => setIsDarkMode(prevState => !prevState);
   const togglePassword = () => setIsPasswordEnabled(previousState => !previousState);
 
   const handleLogout = () => {
@@ -13,49 +13,51 @@ const ProfileScreen = () => {
     console.log("User logged out");
   };
 
+  // Dynamic styles based on dark mode
+  const containerStyle = isDarkMode ? styles.darkContainer : styles.lightContainer;
+  const textStyle = isDarkMode ? styles.darkText : styles.lightText;
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={containerStyle}>
       {/* Profile Section */}
       <View style={styles.section}>
         <Image source={require('../assets/profile.png')} style={styles.profilePic} />
-        <Text style={styles.clientName}>Amy Mee</Text>
+        <Text style={[styles.clientName, textStyle]}>Amy Mee</Text>
       </View>
 
       {/* User Profile */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>User Profile</Text>
-        <Text>Name: Amy Mee</Text>
-        <Text>Location: Sarbah Hall, UG</Text>
+        <Text style={[styles.sectionTitle, textStyle]}>User Profile</Text>
+        <Text style={textStyle}>Name: Amy Mee</Text>
+        <Text style={textStyle}>Location: Sarbah Hall, UG</Text>
       </View>
 
       {/* Connected Accounts */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Connected Accounts</Text>
-        <Text>Financial Accounts</Text>
-        <Text>- Bank Account</Text>
-        <Text>- Mobile Money Account</Text>
-        <Text>Social Accounts</Text>
-        <Text>- Facebook</Text>
+        <Text style={[styles.sectionTitle, textStyle]}>Connected Accounts</Text>
+        <Text style={textStyle}>- Bank Account</Text>
+        <Text style={textStyle}>- Mobile Money Account</Text>
+        <Text style={textStyle}>- Facebook</Text>
       </View>
 
       {/* App Preferences */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>App Preferences</Text>
+        <Text style={[styles.sectionTitle, textStyle]}>App Preferences</Text>
         <View style={styles.preference}>
-          <Text>Dark Mode</Text>
+          <Text style={textStyle}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
         </View>
         <View style={styles.preference}>
-          <Text>Passwords</Text>
+          <Text style={textStyle}>Passwords</Text>
           <Switch value={isPasswordEnabled} onValueChange={togglePassword} />
         </View>
       </View>
 
       {/* Socials */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Socials</Text>
-        <Text>Email: amymee@yahoo.com</Text>
-        <Text>Phone: 0506465106</Text>
+        <Text style={[styles.sectionTitle, textStyle]}>Socials</Text>
+        <Text style={textStyle}>Email: amymee@yahoo.com</Text>
+        <Text style={textStyle}>Phone: 0506465106</Text>
       </View>
 
       {/* Logout Button */}
@@ -67,8 +69,15 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
+  lightContainer: {
+    padding: 67,
+    maxwidth: '100%',
+    backgroundColor: '#f2f2f2',
+  },
+  darkContainer: {
+    width: '100%',
+    padding: 67,
+    backgroundColor: '#333',
   },
   section: {
     marginBottom: 20,
@@ -90,17 +99,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  userPhoto: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
-    marginTop: 10,
-  },
   preference: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 10,
+  },
+  darkText: {
+    color: '#fff',
+  },
+  lightText: {
+    color: '#000',
   },
 });
 

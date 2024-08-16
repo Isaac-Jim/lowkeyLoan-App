@@ -6,7 +6,6 @@ const ProfileScreen = () => {
   const [isPasswordEnabled, setIsPasswordEnabled] = useState(false);
 
   const toggleDarkMode = () => setIsDarkMode(prevState => !prevState);
-  const togglePassword = () => setIsPasswordEnabled(previousState => !previousState);
 
   const handleLogout = () => {
     // Logic for logout
@@ -35,21 +34,35 @@ const ProfileScreen = () => {
       {/* Connected Accounts */}
       <View style={styles.section}>
         <Text style={[styles.sectionTitle, textStyle]}>Connected Accounts</Text>
-        <Text style={textStyle}>- Bank Account</Text>
-        <Text style={textStyle}>- Mobile Money Account</Text>
-        <Text style={textStyle}>- Facebook</Text>
       </View>
 
-      {/* App Preferences */}
+      {/* Bank Account Subsection */}
+      <View style={styles.subsection}>
+          <Text style={[styles.subsectionTitle, textStyle]}>Bank Account</Text>
+          <Text style={textStyle}>Account Number: 123456789</Text>
+          <Text style={textStyle}>Bank Name: ABC Bank</Text>
+        </View>
+
+        {/* Mobile Money Account Subsection */}
+        <View style={styles.subsection}>
+          <Text style={[styles.subsectionTitle, textStyle]}>Mobile Money Account</Text>
+          <Text style={textStyle}>Phone Number: 0501234567</Text>
+          <Text style={textStyle}>Provider: XYZ Mobile Money</Text>
+        </View>
+
+        {/* Facebook Account Subsection */}
+        <View style={styles.subsection}>
+          <Text style={[styles.subsectionTitle, textStyle]}>Facebook</Text>
+          <Text style={textStyle}>Username: amymee</Text>
+          <Text style={textStyle}>Email: amymee@facebook.com</Text>
+        </View>
+      
+            {/* App Preferences */}
       <View style={styles.section}>
         <Text style={[styles.sectionTitle, textStyle]}>App Preferences</Text>
         <View style={styles.preference}>
           <Text style={textStyle}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
-        </View>
-        <View style={styles.preference}>
-          <Text style={textStyle}>Passwords</Text>
-          <Switch value={isPasswordEnabled} onValueChange={togglePassword} />
         </View>
       </View>
 
@@ -82,6 +95,15 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
   },
+  subsection: {
+    fontWeight:'bold',
+    marginTop: 10,
+    marginRight: 'auto',
+    width: '100%',
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Light gray background for subsection
+    borderRadius: 5,
+  },
   profilePic: {
     width: 100,
     height: 100,
@@ -98,6 +120,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  subsectionTitle: {
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   preference: {
     flexDirection: 'row',

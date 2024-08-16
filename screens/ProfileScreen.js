@@ -4,11 +4,9 @@ import { View, Text, StyleSheet, Image, Switch, Button, ScrollView } from 'react
 const ProfileScreen = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isPasswordEnabled, setIsPasswordEnabled] = useState(false);
-  const [isAccessibilityEnabled, setIsAccessibilityEnabled] = useState(false);
 
   const toggleDarkMode = () => setIsDarkMode(previousState => !previousState);
   const togglePassword = () => setIsPasswordEnabled(previousState => !previousState);
-  const toggleAccessibility = () => setIsAccessibilityEnabled(previousState => !previousState);
 
   const handleLogout = () => {
     // Logic for logout
@@ -19,7 +17,7 @@ const ProfileScreen = () => {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Profile Section */}
       <View style={styles.section}>
-        <Image source={require('./assets/profile.png')} style={styles.profilePic} />
+        <Image source={require('../assets/profile.png')} style={styles.profilePic} />
         <Text style={styles.clientName}>Amy Mee</Text>
       </View>
 
@@ -28,7 +26,6 @@ const ProfileScreen = () => {
         <Text style={styles.sectionTitle}>User Profile</Text>
         <Text>Name: Amy Mee</Text>
         <Text>Location: Sarbah Hall, UG</Text>
-        <Image source={require('./assets/profile.png')} style={styles.userPhoto} />
       </View>
 
       {/* Connected Accounts */}

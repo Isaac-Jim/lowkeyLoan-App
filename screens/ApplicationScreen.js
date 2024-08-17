@@ -39,6 +39,10 @@ function ApplicationScreen({ navigation }) {
       setSelectedDocuments([...selectedDocuments, result.uri]);
     }
   };
+  const handleSubmit = () => {
+    // Navigate to the ScheduleAppointmentScreen
+    navigation.navigate('ScheduleAppointmentScreen', { amount, duration, selectedImages, selectedDocuments });
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -49,6 +53,8 @@ function ApplicationScreen({ navigation }) {
         value={amount}
         onChangeText={setAmount}
         keyboardType="numeric"
+        returnKeyType="done"
+        clearButtonMode="while-editing"
       />
 
       <Text style={styles.subheading}>Loan duration</Text>
@@ -92,7 +98,7 @@ function ApplicationScreen({ navigation }) {
 
       {/* File upload section */}
       <View style={styles.uploadContainer}>
-        <Text style={styles.uploadHeading}>Upload Documents and Collateral</Text>
+        <Text style={styles.uploadHeading}>Upload Documents for Collateral</Text>
         <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
           <Text style={styles.uploadButtonText}>Upload Image</Text>
         </TouchableOpacity>
@@ -110,9 +116,9 @@ function ApplicationScreen({ navigation }) {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Schedule Appointment</Text>
-      </TouchableOpacity>
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={styles.submitButtonText}>Schedule Appointment </Text>
+        </TouchableOpacity>
 
       <View style={styles.navigationButtons}>
         <Button title="Home" onPress={() => navigation.navigate('HomeScreen')} />

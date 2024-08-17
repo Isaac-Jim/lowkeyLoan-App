@@ -5,6 +5,7 @@ import HomeScreen from './screens/HomeScreen';
 import ApplicationScreen from './screens/ApplicationScreen'; 
 import ProfileScreen from './screens/ProfileScreen'; 
 import HomeSupport from './screens/HomeSupport';
+import ScheduleAppointmentScreen from './screens/ScheduleAppointmentScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ const App = () => {
       >
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="ApplicationScreen" component={ApplicationScreen} />
+        <Stack.Screen name="ScheduleScreen" component={ScheduleAppointmentScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="HomeSupport" component={HomeSupport} />
       </Stack.Navigator>

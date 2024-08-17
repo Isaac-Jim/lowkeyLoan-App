@@ -5,13 +5,11 @@ import HomeScreen from './screens/HomeScreen';
 import ApplicationScreen from './screens/ApplicationScreen'; 
 import ProfileScreen from './screens/ProfileScreen'; 
 import HomeSupport from './screens/HomeSupport';
-import { ThemeProvider } from './ThemeContext';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <ThemeProvider>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -24,7 +22,6 @@ const App = () => {
         <Stack.Screen name="HomeSupport" component={HomeSupport} />
       </Stack.Navigator>
     </NavigationContainer>
-    </ThemeProvider>
   );
 };
 

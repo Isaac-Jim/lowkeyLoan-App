@@ -12,8 +12,8 @@ const SignInScreen = () => {
 
   const handleSignIn = () => {
     // Example mock credentials (replace this with API call later)
-    const mockEmail = 'user@example.com';
-    const mockPassword = 'password123';
+    const mockEmail = 'oseiemmaadobea@gmail.com';
+    const mockPassword = 'Moimeme123';
   
     if (email === mockEmail && password === mockPassword) {
       console.log('Successfully signed in!');

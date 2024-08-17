@@ -1,19 +1,47 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, ScrollView, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker';
 
 function ApplicationScreen({ navigation }) {
-  // State to store form values
+  // State to store form values and file uploads
   const [amount, setAmount] = useState('');
   const [duration, setDuration] = useState('30 days');
-  const [paymentMethod, setPaymentMethod] = useState('Mobile Money');
-  const [showScheduledPayment, setShowScheduledPayment] = useState(false); // State to show/hide scheduled payment dropdown
+  const [showScheduledAppointment, setShowScheduledAppointment] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedDocuments, setSelectedDocuments] = useState([]);
 
-  // Dummy date for the payment due date (can be replaced with real logic)
-  const paymentDueDate = "15th September 2024";
+  // Dummy date for the appointment date
+  const appointmentDate = "15th September 2024";
+
+  // Handle image selection
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImages([...selectedImages, result.uri]);
+    }
+  };
+
+  // Handle document selection
+  const pickDocument = async () => {
+    const result = await DocumentPicker.getDocumentAsync({
+      type: '*/*',
+    });
+
+    if (result.type === 'success') {
+      setSelectedDocuments([...selectedDocuments, result.uri]);
+    }
+  };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.heading}>How much do you need?</Text>
       <TextInput
         style={styles.input}
@@ -50,47 +78,49 @@ function ApplicationScreen({ navigation }) {
       <View style={styles.dropdownContainer}>
         <TouchableOpacity
           style={styles.dropdown}
-          onPress={() => setShowScheduledPayment(!showScheduledPayment)} // Toggle dropdown visibility
+          onPress={() => setShowScheduledAppointment(!showScheduledAppointment)}
         >
-          <Text style={styles.dropdownText}>Scheduled payment</Text>
-          <FontAwesome name={showScheduledPayment ? "chevron-down" : "chevron-right"} size={24} color="black" />
+          <Text style={styles.dropdownText}>Scheduled Appointment Date</Text>
+          <FontAwesome name={showScheduledAppointment ? "chevron-down" : "chevron-right"} size={24} color="black" />
         </TouchableOpacity>
-        {showScheduledPayment && ( // Conditionally render the payment due date dropdown
-          <View style={styles.paymentDueDateContainer}>
-            <Text style={styles.paymentDueDateText}>Payment Due Date: {paymentDueDate}</Text>
+        {showScheduledAppointment && (
+          <View style={styles.appointmentDateContainer}>
+            <Text style={styles.appointmentDateText}>Appointment Date: {appointmentDate}</Text>
           </View>
         )}
-        
       </View>
 
-      <Text style={styles.subheading}>Where should we send the money?</Text>
-      <View style={styles.paymentMethodContainer}>
-        <TouchableOpacity
-          style={[styles.paymentMethodButton, paymentMethod === 'Bank Account' && styles.activePaymentMethodButton]}
-          onPress={() => setPaymentMethod('Bank Account')}
-        >
-          <Text style={styles.paymentMethodText}>Bank Account</Text>
+      {/* File upload section */}
+      <View style={styles.uploadContainer}>
+        <Text style={styles.uploadHeading}>Upload Documents and Collateral</Text>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
+          <Text style={styles.uploadButtonText}>Upload Image</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.paymentMethodButton, paymentMethod === 'Mobile Money' && styles.activePaymentMethodButton]}
-          onPress={() => setPaymentMethod('Mobile Money')}
-        >
-          <Text style={styles.paymentMethodText}>Mobile Money</Text>
+        <TouchableOpacity style={styles.uploadButton} onPress={pickDocument}>
+          <Text style={styles.uploadButtonText}>Upload Document</Text>
         </TouchableOpacity>
+
+        <View style={styles.fileList}>
+          {selectedImages.map((uri, index) => (
+            <Image key={index} source={{ uri }} style={styles.imagePreview} />
+          ))}
+          {selectedDocuments.map((uri, index) => (
+            <Text key={index} style={styles.documentPreview}>Document {index + 1}</Text>
+          ))}
+        </View>
       </View>
 
       <TouchableOpacity style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Get Funds</Text>
+        <Text style={styles.submitButtonText}>Schedule Appointment</Text>
       </TouchableOpacity>
 
       <View style={styles.navigationButtons}>
-        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')}  />
+        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')} />
         <Button title="Loan" onPress={() => navigation.navigate('ApplicationScreen')} color="purple" />
         <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} />
         <Button title="Profile" onPress={() => navigation.navigate('ProfileScreen')} />
       </View>
-      
-    </View>
+    </ScrollView>
   );
 }
 
@@ -158,36 +188,50 @@ const styles = StyleSheet.create({
   dropdownText: {
     fontSize: 16,
   },
-  paymentDueDateContainer: {
+  appointmentDateContainer: {
     padding: 10,
     borderWidth: 1,
     borderColor: '#ddd',
     borderRadius: 5,
     backgroundColor: '#f9f9f9',
   },
-  paymentDueDateText: {
+  appointmentDateText: {
     fontSize: 16,
     color: '#333',
   },
-  paymentMethodContainer: {
-    flexDirection: 'row',
+  uploadContainer: {
     marginBottom: 20,
   },
-  paymentMethodButton: {
-    flex: 1,
+  uploadHeading: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  uploadButton: {
+    backgroundColor: '#007bff',
     padding: 15,
-    borderWidth: 1,
-    borderColor: '#333',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    marginHorizontal: 5,
+    marginBottom: 10,
   },
-  activePaymentMethodButton: {
-    backgroundColor: 'lightgreen',
+  uploadButtonText: {
+    color: '#fff',
+    fontSize: 16,
   },
-  paymentMethodText: {
-    color: '#333',
+  fileList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  imagePreview: {
+    width: 100,
+    height: 100,
+    margin: 5,
+    borderRadius: 5,
+  },
+  documentPreview: {
+    margin: 5,
+    fontSize: 16,
   },
   submitButton: {
     backgroundColor: 'green',

@@ -1,20 +1,28 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
-import HomeSupport from './screens/HomeSupport'; // Adjust the path to where your HomeSupport component is located
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import ApplicationScreen from './screens/ApplicationScreen'; 
+import ProfileScreen from './screens/ProfileScreen'; 
+import HomeSupport from './screens/HomeSupport';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <HomeSupport />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false, // Hides the header for all screens
+        }}
+      >
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="ApplicationScreen" component={ApplicationScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="HomeSupport" component={HomeSupport} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

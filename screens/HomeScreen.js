@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet, StatusBar, Button } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const loanHistory = [
-    { id: '1', status: 'Loan Received', detail: 'Loan of ₦30,000 was received' },
-    { id: '2', status: 'Loan Disbursed', detail: '₦30,000 was disbursed to your bank' },
-    { id: '3', status: 'Loan Approved', detail: 'Loan of ₦30,000 was approved' },
-    { id: '4', status: 'Loan Declined', detail: 'We\'re sorry! Your loan was declined' },
+    { id: '1', status: 'Loan Received', detail: 'Loan of $50 was received' },
+    { id: '2', status: 'Loan Disbursed', detail: '$50 was disbursed to your bank' },
+    { id: '3', status: 'Loan Approved', detail: 'Loan of $50 was approved' },
+    { id: '4', status: 'Loan Declined', detail: 'We are sorry! Your loan was declined' },
   ];
 
   const renderItem = ({ item }) => (
@@ -21,20 +21,18 @@ const HomeScreen = () => {
       <StatusBar barStyle="dark-content" />
       <View style={styles.header}>
         <Text style={styles.loanLimit}>Loan Limit</Text>
-        <Text style={styles.amount}>₦30,000</Text>
-        <Text style={styles.duration}>Loan duration: 29 days</Text>
-        <TouchableOpacity style={styles.applyButton}>
-          <Text style={styles.applyText}>Apply</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.chooseAmount}>
-          <Text style={styles.chooseText}>Choose amount</Text>
+        <Text style={styles.amount}>$50</Text>
+        <Text style={styles.duration}>Loan duration: 30 days</Text>
+        <TouchableOpacity 
+          style={styles.applyButton}
+          onPress={() => navigation.navigate('ApplicationScreen')} // Navigate to ApplicationScreen
+        >
+          <Text style={styles.applyText}>Apply</Text> 
         </TouchableOpacity>
       </View>
+  
       <View style={styles.navBar}>
-        <TouchableOpacity style={styles.navItem}><Text style={styles.navText}>Products</Text></TouchableOpacity>
         <TouchableOpacity style={styles.navItem}><Text style={styles.navText}>History</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}><Text style={styles.navText}>Invite</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}><Text style={styles.navText}>Accounts</Text></TouchableOpacity>
       </View>
       <FlatList
         data={loanHistory}
@@ -42,15 +40,24 @@ const HomeScreen = () => {
         keyExtractor={item => item.id}
         style={styles.historyList}
       />
+      <View style={styles.navigationButtons}>
+        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')} color="purple" />
+        <Button title="Loan" onPress={() => navigation.navigate('ApplicationScreen')} />
+        <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} />
+        <Button title="Profile" onPress={() => navigation.navigate('ProfileScreen')} />
+      </View>
     </View>
   );
 };
+// Apply Button must lead to the ApplicationScreen.js
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
     padding: 16,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
   },
   header: {
     backgroundColor: '#4CAF50',
@@ -118,6 +125,11 @@ const styles = StyleSheet.create({
   historyDetail: {
     fontSize: 14,
     color: '#555555',
+  },
+  navigationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 45,
   },
 });
 

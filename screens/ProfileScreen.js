@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Switch, Button, ScrollView } from 'react-native';
 
-const ProfileScreen = () => {
+
+const ProfileScreen = ({ navigation }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isPasswordEnabled, setIsPasswordEnabled] = useState(false);
 
   const toggleDarkMode = () => setIsDarkMode(prevState => !prevState);
 
@@ -78,26 +78,29 @@ const ProfileScreen = () => {
         <Button title="Logout" onPress={handleLogout} color="red" />
       </View>
       <View style={styles.navigationButtons}>
-        <Button title="Home" onPress={() => {}} />
-        <Button title="Loan" onPress={() => {}} />
-        <Button title="Chat" onPress={() => {}} color="purple" />
-        <Button title="Profile" onPress={() => {}} />
-      </View>
-      
+        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')}  />
+        <Button title="Loan" onPress={() => navigation.navigate('ApplicationScreen')} />
+        <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} />
+        <Button title="Profile" onPress={() => navigation.navigate('ProfileScreen')} color="purple" />
+      </View>  
+
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  lightContainer: {
-    padding: 67,
-    maxwidth: '100%',
-    backgroundColor: '#f2f2f2',
+  lightcontainer: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+    padding: 16,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
   },
   darkContainer: {
-    width: '100%',
-    padding: 67,
+    padding: 5,
     backgroundColor: '#333',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
   },
   section: {
     marginBottom: 20,
@@ -143,6 +146,11 @@ const styles = StyleSheet.create({
   },
   lightText: {
     color: '#000',
+  },
+  navigationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 45,
   },
 });
 

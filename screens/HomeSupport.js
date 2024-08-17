@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Linking, Image } from 'react-native';
 
-const HomeSupport = () => {
+const HomeSupport = ({ navigation }) => {
   const [email, setEmail] = useState('');
 
   const handleEmailUs = () => {
@@ -57,13 +57,10 @@ const HomeSupport = () => {
       <Text style={styles.chatText}>Let's chat</Text>
 
       <View style={styles.navigationButtons}>
-        <Button title="Home" onPress={() => {}} />
-        <Button title="Loan" onPress={() => {}} />
-        <Button title="Chat" onPress={() => {}} color="purple" />
-        <Button
-          title="Profile"
-          onPress={() => navigation.navigate('ProfileScreen')}
-        />
+        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')}  />
+        <Button title="Loan" onPress={() => navigation.navigate('ApplicationScreen')} />
+        <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} color="purple"/>
+        <Button title="Profile" onPress={() => navigation.navigate('ProfileScreen')} />
       </View>      
     </View>
   );
@@ -72,7 +69,8 @@ const HomeSupport = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 20,

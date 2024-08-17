@@ -1,6 +1,10 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import SplashScreen from './screens/SplashScreen';
+import SignInScreen from './screens/SignInScreen';
+import SignUpScreen from "./screens/SignUpScreen";
 import HomeScreen from './screens/HomeScreen';
 import ApplicationScreen from './screens/ApplicationScreen'; 
 import ProfileScreen from './screens/ProfileScreen'; 
@@ -17,9 +21,12 @@ const App = () => {
           headerShown: false, // Hides the header for all screens
         }}
       >
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="ApplicationScreen" component={ApplicationScreen} />
-        <Stack.Screen name="ScheduleScreen" component={ScheduleAppointmentScreen} />
+        <Stack.Screen name="ScheduleAppointmentScreen" component={ScheduleAppointmentScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="HomeSupport" component={HomeSupport} />
       </Stack.Navigator>

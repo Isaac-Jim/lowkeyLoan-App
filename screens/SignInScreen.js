@@ -11,8 +11,19 @@ const SignInScreen = () => {
   const navigation = useNavigation();
 
   const handleSignIn = () => {
-    console.log('Signing in with email:', email, 'and password:', password);
-    // Handle sign-in logic here
+    // Example mock credentials (replace this with API call later)
+    const mockEmail = 'user@example.com';
+    const mockPassword = 'password123';
+  
+    if (email === mockEmail && password === mockPassword) {
+      console.log('Successfully signed in!');
+      // Navigate to the home screen or wherever after successful sign-in
+      navigation.navigate('HomeScreen');
+    } else {
+      console.log('Invalid email or password');
+      // Show an error message to the user (You can use a state to manage this)
+      alert('Invalid email or password');
+    }
   };
 
   const handleSignUpNavigation = () => {

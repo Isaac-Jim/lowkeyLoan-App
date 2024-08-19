@@ -60,10 +60,6 @@ const SignInScreen = () => {
       <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
         <Text style={styles.signInButtonText}>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.googleButton}>
-        <FontAwesomeIcon icon={faGoogle} size={20} color="green" />
-        <Text style={styles.googleButtonText}>Sign In with Google</Text>
-      </TouchableOpacity>
       <TouchableOpacity style={styles.signUpButton} onPress={handleSignUpNavigation}>
         <Text style={styles.signUpButtonText}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
@@ -85,8 +81,8 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   logo: {
-    width: 90, 
-    height: 50,
+    width: 300, 
+    height: 80,
   },
   title: {
     fontSize: 28,

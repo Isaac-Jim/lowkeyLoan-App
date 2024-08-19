@@ -89,9 +89,7 @@ const SignUpScreen = () => {
           <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
             <Text style={styles.signUpButtonText}>Sign Up</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.googleButton}>
-            <Text style={styles.googleButtonText}>Sign Up with Google</Text>
-          </TouchableOpacity>
+          
           <TouchableOpacity style={styles.signInButton} onPress={handleSignInNavigation}>
             <Text style={styles.signInButtonText}>Already have an account? Sign In</Text>
           </TouchableOpacity>

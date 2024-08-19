@@ -16,13 +16,29 @@ const HomeSupport = ({ navigation }) => {
   };
 
   const handleVisitWebsite = () => {
-    const websiteUrl = 'https://lowkeyloans-9e711.web.app/aboutUs.html';
+    const websiteUrl = 'https://lowkeyloans-9e711.web.app/homepage.html';
     Linking.openURL(websiteUrl);
   };
 
   const handleCallSupport = () => {
-    const phoneNumber = 'tel:0506465106';
+    const phoneNumber = 'tel:0247266229';
     Linking.openURL(phoneNumber);
+  };
+
+  const handleWhatsApp = () => {
+    const phoneNumber = '233247266229'; 
+    const message = 'Hello, I would like to inquire about your loan services.'; // Replace with the default message if needed
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+    
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          return Linking.openURL(url);
+        } else {
+          console.log('WhatsApp is not installed on this device');
+        }
+      })
+      .catch((err) => console.error('An error occurred', err));
   };
 
   return (
@@ -52,14 +68,18 @@ const HomeSupport = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <Button title="Call Support" onPress={handleCallSupport} color="green" />
       </View>
-      
+
+      <View style={styles.buttonContainer}>
+        <Button title="Contact on WhatsApp" onPress={handleWhatsApp} color="green" />
+      </View>
+
       <Image source={require('../assets/profile.png')} style={styles.image} />
       <Text style={styles.chatText}>Let's chat</Text>
 
       <View style={styles.navigationButtons}>
-        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')}  />
+        <Button title="Home" onPress={() => navigation.navigate('HomeScreen')} />
         <Button title="Loan" onPress={() => navigation.navigate('ApplicationScreen')} />
-        <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} color="purple"/>
+        <Button title="Chat" onPress={() => navigation.navigate('HomeSupport')} color="purple" />
         <Button title="Profile" onPress={() => navigation.navigate('ProfileScreen')} />
       </View>      
     </View>

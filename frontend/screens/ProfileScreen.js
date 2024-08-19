@@ -1,10 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = () => {
+  const navigation = useNavigation();
+
   const handleLogout = () => {
     // Logic for logout
     console.log("User logged out");
+
+    // Navigate to SplashScreen
+    navigation.navigate('Splash');
   };
 
   return (
@@ -57,9 +63,9 @@ const ProfileScreen = ({ navigation }) => {
 
       {/* Logout Button */}
       <View style={styles.section}>
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-    <Text style={styles.logoutButtonText}>Logout</Text>
-    </TouchableOpacity>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutButtonText}>Logout</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Navigation Buttons */}
@@ -117,11 +123,11 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     backgroundColor: 'red',
-    paddingVertical: 5,  
+    paddingVertical: 5,
     paddingHorizontal: 16,
     borderRadius: 10,
     alignItems: 'center',
-    alignSelf: 'center', 
+    alignSelf: 'center',
     marginTop: 20,
   },
   logoutButtonText: {
